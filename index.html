@@ -3,19 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap" rel="stylesheet">
     <title>The HangMan Game</title>
+    <script src="./scripts/script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>The HangMan Game</h1>
-    </header>
-    <main>
-        <h2>Welcome to the HangMan Game</h2>
-        <p>Click the button below to start playing!</p>
-        <button onclick="startGame()">Start Game</button>
-    </main>
-    <footer>
-        <p>&copy; 2026 The HangMan Game. All rights reserved.</p>
-    </footer>
+    <div id="wrapper">
+        <header>
+            <h1>The HangMan Game</h1>
+            <p>Guess the full word before the hangman dies!</p>
+        </header>
+        <main>
+            <section class="game-card">
+                <section class="image-section">
+                    <img id="hangmanimage" src="./images/hangman-0.jpeg" alt="Hanged man image">
+                </section>
+                <section class="game-section">
+                    <p><strong>Hint:</strong> <span id="hintText">Loading...</span></p>
+                    <p id="wordDisplay" class="word-display">_ _ _ _</p>
+                    <p>Wrong guesses: <span id="wrongCount">0</span>/6</p>
+                    <p>Used Letters: <span id="usedLetters">None</span></p>
+                    <form id="guessForm">
+                        <label for="letterInput">Enter a letter:</label>
+                        <input type="text" id="letterInput" maxlength="1" autocomplete="off">
+                        <button id="guessButton" type="submit">Guess</button>
+                    </form>
+                    <p id="messageText" class="message"></p>
+                    <button id="playAgainButton" type="button">Play Again</button>
+                </section>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2026 The HangMan Game. All rights reserved.</p>
+        </footer>
+    </div>    
 </body>
 </html>

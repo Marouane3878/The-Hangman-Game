@@ -1,0 +1,29 @@
+/* Author: Marouane Chtitou */
+body {
+  font-family: "Rubik Spray Paint", system-ui;
+  font-weight: 50;
+  font-style: normal;
+  margin: 0;
+  background-color: black;
+  color: black;
+}
+
+#wrapper {
+  width: 950%;
+  min-height: 850px;
+  margin: 0 auto;
+  background-color: gainsboro;
+}
+
+header {
+  background-color: darkred;
+  color: white;
+  padding: 22px 30px;
+  border-bottom: 4px solid goldenrod;
+}
+header h1 {
+  margin: 0;
+  font-size: 40px;
+  text-shadow: 3px 3px 0px black;
+  font-weight: 5;
+}/*# sourceMappingURL=styles.css.map */
