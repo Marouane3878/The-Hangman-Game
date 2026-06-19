@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap" rel="stylesheet">
-    <title>The HangMan Game</title>
-    <script src="./scripts/script.js" defer></script>
-</head>
-<body>
-    <div id="wrapper">
-        <header>
-            <h1>The HangMan Game</h1>
-            <p>Guess the full word before the hangman dies!</p>
-        </header>
-        <main>
-            <section class="game-card">
-                <section class="image-section">
-                    <img id="hangmanimage" src="./images/hangman-0.jpeg" alt="Hanged man image">
-                </section>
-                <section class="game-section">
+    <!-- Author: Marouane Chtitou -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styles/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap" rel="stylesheet">
+        <title>The HangMan Game</title>
+        <script src="./scripts/HangmanGame.js" defer></script>
+        <script src="./scripts/functions.js" defer></script>
+        <script src="./scripts/script.js" defer></script>
+    </head>
+    <body>
+        <div id="startScreen">
+            <div id="startBox">
+                <h2>Save The Hanged Man</h2>
+                <p>Play the guessing word game and save the hanged man before it is too late.</p>
+                <button type="button" id="startButton">Play</button>
+            </div>
+        </div>
+        <div id="wrapper">
+            <header>
+                <h1>Hangman Game</h1>
+                <p>Guess the word before the full hangman appears.</p>
+            </header>
+            <main>
+                <section class="game-card">
                     <p><strong>Hint:</strong> <span id="hintText">Loading...</span></p>
+                    <section class="image-section">
+                        <img id="hangmanImage" src="./images/hangman-0.jpeg" alt="Hangman photo">
+                    </section>
                     <p id="wordDisplay" class="word-display">_ _ _ _</p>
-                    <p>Wrong guesses: <span id="wrongCount">0</span>/6</p>
-                    <p>Used Letters: <span id="usedLetters">None</span></p>
-                    <form id="guessForm">
-                        <label for="letterInput">Enter a letter:</label>
-                        <input type="text" id="letterInput" maxlength="1" autocomplete="off">
-                        <button id="guessButton" type="submit">Guess</button>
-                    </form>
+                    <p>Wrong guesses: <span id="wrongCount">0</span> / 6</p>
+                    <p>Used letters: <span id="usedLetters">None</span></p>
                     <p id="messageText" class="message"></p>
-                    <button id="playAgainButton" type="button">Play Again</button>
+                    <section id="keyboard" class="keyboard">
+                    </section>
+                    <button type="button" id="playAgainButton">Play Again</button>
                 </section>
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2026 The HangMan Game. All rights reserved.</p>
-        </footer>
-    </div>    
-</body>
+            </main>
+            <footer>
+                <p>© Copyright 2026 - COMP2132</p>
+            </footer>
+        </div>
+    </body>
 </html>

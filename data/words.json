@@ -1,0 +1,34 @@
+[
+    {
+        "word": "javascript",
+        "hint": "A programming language used in web browsers."
+    },
+    {
+        "word": "function",
+        "hint": "Reusable block of code."
+    },
+    {
+        "word": "variable",
+        "hint": "Stores a value in programming."
+    },
+    {
+        "word": "browser",
+        "hint": "Software used to view websites."
+    },
+    {
+        "word": "object",
+        "hint": "A collection of related properties and methods."
+    },
+    {
+        "word": "array",
+        "hint": "Stores multiple values in one variable."
+    },
+    {
+        "word": "event",
+        "hint": "Something that happens on a web page, like a click."
+    },
+    {
+        "word": "fetch",
+        "hint": "Used to request data from a file or server."
+    }
+]

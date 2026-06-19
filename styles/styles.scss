@@ -1,36 +1,337 @@
 /* Author: Marouane Chtitou */
 
-@mixin box-style($borderColor, $backgroundColor){
+@mixin box-style($borderColor, $backgroundColor) {
     border: 4px solid $borderColor;
-    border-radius: 10px;
+    border-radius: 12px;
     background-color: $backgroundColor;
-    box-shadow: 0px 0px 10px gray;
+    box-shadow: 4px 4px 8px gray;
 }
 
-body{
-    font-family: "Rubik Spray Paint", system-ui;
-    font-weight: 50;
-    font-style: normal;
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
     background-color: black;
     color: black;
 }
-#wrapper{
-    width: 950%;
-    min-height: 850px;
+
+/* START SCREEN */
+
+#startScreen {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#startBox {
+    width: 100%;
+    max-width: 520px;
+    padding: 35px;
+    text-align: center;
+    border: 5px solid goldenrod;
+    border-radius: 15px;
+    background-color: darkred;
+    color: white;
+    box-shadow: 5px 5px 12px black;
+
+    h2 {
+        margin-top: 0;
+        font-size: 42px;
+        font-family: "Rubik Spray Paint", Arial, sans-serif;
+        text-shadow: 3px 3px 0 black;
+        font-weight: 1;
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+}
+
+#startButton {
+    width: 180px;
+    padding: 15px;
+    font-size: 24px;
+    background-color: goldenrod;
+    color: black;
+    border: 3px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#startButton:hover {
+    background-color: yellow;
+}
+
+
+#wrapper {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 100vh;
     margin: 0 auto;
     background-color: gainsboro;
 }
-header{
+
+header {
     background-color: darkred;
     color: white;
     padding: 22px 30px;
     border-bottom: 4px solid goldenrod;
+    text-align: center;
 
-    h1{
+    h1 {
         margin: 0;
-        font-size: 40px;
-        text-shadow: 3px 3px 0px black;
-        font-weight: 5;
+        font-size: 48px;
+        font-family: "Rubik Spray Paint", Arial, sans-serif;
+        text-shadow: 3px 3px 0 black;
+        font-weight: 1;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+}
+
+main {
+    width: 100%;
+    padding: 30px;
+}
+
+/* GAME CARD */
+
+.game-card {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    min-height: 650px;
+    margin: 0 auto;
+    padding: 25px;
+    text-align: center;
+    @include box-style(darkred, white);
+
+    p {
+        font-size: 20px;
+    }
+}
+
+/* IMAGE */
+
+.image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+
+    img {
+        width: 320px;
+        max-width: 100%;
+        height: 320px;
+        object-fit: contain;
+        background-color: whitesmoke;
+        border: 2px solid black;
+    }
+}
+
+/* WORD */
+
+.word-display {
+    margin: 20px 0;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: darkred;
+}
+
+/* MESSAGE */
+
+.message {
+    min-height: 30px;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: darkred;
+}
+
+/* KEYBOARD */
+
+.keyboard {
+    width: 100%;
+    max-width: 650px;
+    margin: 30px auto 0 auto;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    border-top: 3px solid darkred;
+}
+
+.letter-button {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid darkred;
+    border-radius: 6px;
+    background-color: gainsboro;
+    color: black;
+    cursor: pointer;
+}
+
+.letter-button:hover {
+    background-color: goldenrod;
+}
+
+.letter-button.correct {
+    background-color: lightgreen;
+    color: black;
+    cursor: not-allowed;
+}
+
+.letter-button.wrong {
+    background-color: lightcoral;
+    color: black;
+    cursor: not-allowed;
+}
+
+.letter-button:disabled {
+    cursor: not-allowed;
+}
+
+/* PLAY AGAIN */
+
+#playAgainButton {
+    display: none;
+    margin-top: 25px;
+    padding: 12px 18px;
+    border: 2px solid goldenrod;
+    border-radius: 6px;
+    background-color: darkred;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#playAgainButton:hover {
+    background-color: goldenrod;
+    color: black;
+}
+
+/* ANIMATION */
+
+.fade-message {
+    animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* FOOTER */
+
+footer {
+    background-color: goldenrod;
+    color: black;
+    padding: 18px 30px;
+    border-top: 4px solid darkred;
+    text-align: center;
+
+    p {
+        margin: 0;
+        font-size: 18px;
+    }
+}
+
+/* SMALL SCREEN ONLY */
+
+@media (max-width: 700px) {
+    main {
+        padding: 15px;
+    }
+
+    header {
+        padding: 18px 15px;
+
+        h1 {
+            font-size: 34px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .game-card {
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+        padding: 15px;
+
+        p {
+            font-size: 17px;
+        }
+    }
+
+    .image-section {
+        img {
+            width: 260px;
+            height: 260px;
+        }
+    }
+
+    .word-display {
+        font-size: 28px;
+        letter-spacing: 6px;
+    }
+
+    .keyboard {
+        gap: 6px;
+        padding: 12px;
+    }
+
+    .letter-button {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    #startBox {
+        padding: 25px;
+
+        h2 {
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 28px;
+        }
     }
 }
