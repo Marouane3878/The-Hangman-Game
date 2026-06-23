@@ -12,6 +12,11 @@ const messageText = document.getElementById("messageText");
 const playAgainButton = document.getElementById("playAgainButton");
 const keyboard = document.getElementById("keyboard");
 
+const correctSound = new Audio("./audio/correct.mp3");
+const wrongSound = new Audio("./audio/wrong.mp3");
+const winSound = new Audio("./audio/win.mp3");
+const loseSound = new Audio("./audio/lose.mp3");
+
 const game = new HangmanGame(6);
 
 startButton.addEventListener("click", function() {
@@ -24,8 +29,8 @@ playAgainButton.addEventListener("click", function() {
 
 fetch("./data/words.json")
     .then(function(response) {
-        if (!response) {
-            throw new Error("Could not load words");
+        if (!response.ok) {
+            throw new Error("Could not load words.");
         }
 
         return response.json();
@@ -36,7 +41,7 @@ fetch("./data/words.json")
     })
     .catch(function(error) {
         hintText.textContent = "Words could not load.";
-        messageText.textContent = "Server error.";
+        messageText.textContent = "Server error occurred.";
         console.log(error);
     });
 
@@ -64,17 +69,19 @@ function handleLetterClick(button) {
 
     const result = game.guessLetter(letter);
 
-    game.guessedLetters.push;
     usedLetters.textContent = game.guessedLetters.join(", ");
+    wrongCount.textContent = game.wrongGuesses;
 
     if (result === "correct") {
         button.className = "letter-button correct";
+        updateHangmanImage(game, hangmanImage);
         showMessage(messageText, "Correct guess.");
+        playSound(correctSound);
     } else if (result === "wrong") {
         button.className = "letter-button wrong";
-        wrongCount.textContent = game.wrongGuesses;
         updateHangmanImage(game, hangmanImage);
         showMessage(messageText, "Wrong guess.");
+        playSound(wrongSound);
     }
 
     showWord(game, wordDisplay);
@@ -84,14 +91,18 @@ function handleLetterClick(button) {
 function checkResult() {
     if (game.hasPlayerWon()) {
         game.endGame();
+        showHappyHangman(hangmanImage);
         showMessage(messageText, "You won. You saved the hanged man.");
+        playSound(winSound);
         playAgainButton.style.display = "inline-block";
         disableKeyboard();
     }
 
     if (game.hasPlayerLost()) {
         game.endGame();
+        updateHangmanImage(game, hangmanImage);
         showMessage(messageText, "You lost. The word was " + game.word + ".");
+        playSound(loseSound);
         playAgainButton.style.display = "inline-block";
         disableKeyboard();
     }

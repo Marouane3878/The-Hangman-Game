@@ -50,9 +50,21 @@ function updateHangmanImage(game, hangmanImage) {
     hangmanImage.alt = "Hangman stage " + game.wrongGuesses;
 }
 
+function showHappyHangman(hangmanImage) {
+    hangmanImage.src = "./images/hangman-happy.jpeg";
+    hangmanImage.alt = "Happy saved hangman";
+}
+
 function showMessage(messageText, message) {
     messageText.className = "message";
     void messageText.offsetWidth;
     messageText.textContent = message;
     messageText.className = "message fade-message";
+}
+
+function playSound(sound) {
+    sound.currentTime = 0;
+    sound.play().catch(function() {
+        console.log("Audio file could not play.");
+    });
 }
