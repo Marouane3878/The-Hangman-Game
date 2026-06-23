@@ -10,18 +10,14 @@ body {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-}
-
-body {
   font-family: Arial, sans-serif;
   background-color: black;
   color: black;
 }
 
-/* START SCREEN */
 #startScreen {
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   left: 0;
   top: 0;
   width: 100%;
@@ -78,6 +74,8 @@ body {
   min-height: 100vh;
   margin: 0 auto;
   background-color: gainsboro;
+  border-left: 4px solid darkred;
+  border-right: 4px solid darkred;
 }
 
 header {
@@ -108,38 +106,87 @@ main {
 .game-card {
   display: block;
   width: 100%;
-  max-width: 800px;
-  min-height: 650px;
+  max-width: 850px;
+  min-height: 680px;
   margin: 0 auto;
   padding: 25px;
   text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
   border: 4px solid darkred;
-  border-radius: 12px;
+  border-radius: 14px;
   background-color: white;
-  box-shadow: 4px 4px 8px gray;
+  box-shadow: 4px 4px 10px gray;
 }
 .game-card p {
   font-size: 20px;
 }
 
-/* IMAGE */
+.crowd-background {
+  width: 100%;
+  min-height: 360px;
+  margin: 20px 0;
+  padding: 20px;
+  border: 3px solid darkred;
+  border-radius: 14px;
+  background-color: whitesmoke;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.crowd-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.crowd-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.image-section {
+  position: relative;
+  z-index: 1;
+}
+
+.game-card.happy-crowd .crowd-background::before {
+  background-image: url("../images/crowd-happy.jpg");
+}
+
+.game-card.sad-crowd .crowd-background::before {
+  background-image: url("../images/crowd-sad.jpg");
+}
+
 .image-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
-}
-.image-section img {
-  width: 320px;
-  max-width: 100%;
-  height: 320px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  background-color: whitesmoke;
-  border: 2px solid black;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: transparent;
 }
 
-/* WORD */
+.image-section img {
+  display: block;
+  width: 330px;
+  max-width: 100%;
+  height: 330px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border: 2px solid black;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+/* WORD DISPLAY */
 .word-display {
   margin: 20px 0;
   font-size: 42px;
@@ -160,7 +207,7 @@ main {
 /* KEYBOARD */
 .keyboard {
   width: 100%;
-  max-width: 650px;
+  max-width: 700px;
   margin: 30px auto 0 auto;
   padding: 15px;
   display: flex;
@@ -177,32 +224,150 @@ main {
   font-weight: bold;
   border: 2px solid darkred;
   border-radius: 6px;
-  background-color: gainsboro;
+  background-color: white;
   color: black;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
 .letter-button:hover {
   background-color: goldenrod;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px gray;
 }
 
 .letter-button.correct {
   background-color: lightgreen;
   color: black;
   cursor: not-allowed;
+  animation: correctButton 0.4s;
 }
 
 .letter-button.wrong {
   background-color: lightcoral;
   color: black;
   cursor: not-allowed;
+  animation: wrongButton 0.4s;
 }
 
 .letter-button:disabled {
   cursor: not-allowed;
 }
 
-/* PLAY AGAIN */
+@keyframes correctButton {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes wrongButton {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+/* CORRECT / WRONG FEEDBACK - MATCHES YOUR JS */
+.game-card.correct-flash {
+  animation: correctCardFlash 0.7s;
+}
+
+.game-card.wrong-flash {
+  animation: wrongCardFlash 0.7s;
+}
+
+.game-card.correct-flash .crowd-background {
+  animation: correctBackgroundFlash 0.7s;
+}
+
+.game-card.wrong-flash .crowd-background {
+  animation: wrongBackgroundFlash 0.7s;
+}
+
+@keyframes correctCardFlash {
+  0% {
+    border-color: darkred;
+    box-shadow: 4px 4px 10px gray;
+  }
+  50% {
+    border-color: green;
+    box-shadow: 0 0 35px green;
+  }
+  100% {
+    border-color: darkred;
+    box-shadow: 4px 4px 10px gray;
+  }
+}
+@keyframes wrongCardFlash {
+  0% {
+    border-color: darkred;
+    box-shadow: 4px 4px 10px gray;
+    transform: translateX(0);
+  }
+  25% {
+    border-color: red;
+    box-shadow: 0 0 35px red;
+    transform: translateX(-8px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  75% {
+    transform: translateX(-8px);
+  }
+  100% {
+    border-color: darkred;
+    box-shadow: 4px 4px 10px gray;
+    transform: translateX(0);
+  }
+}
+@keyframes correctBackgroundFlash {
+  0% {
+    background-color: whitesmoke;
+    border-color: darkred;
+    box-shadow: none;
+  }
+  50% {
+    background-color: lightgreen;
+    border-color: green;
+    box-shadow: inset 0 0 45px green, 0 0 25px green;
+  }
+  100% {
+    background-color: whitesmoke;
+    border-color: darkred;
+    box-shadow: none;
+  }
+}
+@keyframes wrongBackgroundFlash {
+  0% {
+    background-color: whitesmoke;
+    border-color: darkred;
+    box-shadow: none;
+  }
+  50% {
+    background-color: lightcoral;
+    border-color: red;
+    box-shadow: inset 0 0 45px red, 0 0 25px red;
+  }
+  100% {
+    background-color: whitesmoke;
+    border-color: darkred;
+    box-shadow: none;
+  }
+}
+/* PLAY AGAIN BUTTON */
 #playAgainButton {
   display: none;
   margin-top: 25px;
@@ -220,7 +385,72 @@ main {
   color: black;
 }
 
-/* ANIMATION */
+/* RESULT POPUP */
+#resultPopup {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#resultBox {
+  width: 100%;
+  max-width: 480px;
+  padding: 35px;
+  text-align: center;
+  border: 5px solid goldenrod;
+  border-radius: 15px;
+  background-color: darkred;
+  color: white;
+  box-shadow: 5px 5px 12px black;
+  animation: popupFade 0.5s;
+}
+
+#resultTitle {
+  margin-top: 0;
+  font-size: 38px;
+  font-family: "Rubik Spray Paint", Arial, sans-serif;
+  text-shadow: 3px 3px 0 black;
+}
+
+#resultMessage {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+#popupPlayAgainButton {
+  padding: 14px 22px;
+  font-size: 20px;
+  background-color: goldenrod;
+  color: black;
+  border: 3px solid white;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#popupPlayAgainButton:hover {
+  background-color: yellow;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* MESSAGE FADE */
 .fade-message {
   animation: fadeIn 0.7s;
 }
@@ -231,6 +461,27 @@ main {
   }
   to {
     opacity: 1;
+  }
+}
+/* CONFETTI */
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  background-color: goldenrod;
+  z-index: 5;
+  animation: confettiFall 2.5s linear forwards;
+}
+
+@keyframes confettiFall {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
   }
 }
 /* FOOTER */
@@ -246,7 +497,7 @@ footer p {
   font-size: 18px;
 }
 
-/* SMALL SCREEN ONLY */
+/* SMALL SCREEN */
 @media (max-width: 700px) {
   main {
     padding: 15px;
@@ -268,6 +519,10 @@ footer p {
   }
   .game-card p {
     font-size: 17px;
+  }
+  .crowd-background {
+    min-height: 300px;
+    padding: 10px;
   }
   .image-section img {
     width: 260px;
@@ -291,6 +546,7 @@ footer p {
   }
   #startBox h2 {
     font-size: 32px;
+    font-weight: 1;
   }
   #startBox p {
     font-size: 18px;

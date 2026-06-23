@@ -21,29 +21,55 @@
                 <button type="button" id="startButton">Play</button>
             </div>
         </div>
+
         <div id="wrapper">
             <header>
                 <h1>Hangman Game</h1>
-                <p>Guess the word before the full hangman appears.</p>
+                <p>Guess the word to save the hanged man.</p>
             </header>
+
             <main>
                 <section class="game-card">
                     <p><strong>Hint:</strong> <span id="hintText">Loading...</span></p>
-                    <section class="image-section">
-                        <img id="hangmanImage" src="./images/hangman-0.jpeg" alt="Hangman photo">
+
+                    <section class="crowd-background">
+                        <section class="image-section">
+                            <img id="hangmanImage" src="./images/hangman-0.png" alt="Hangman photo">
+                        </section>
                     </section>
+
                     <p id="wordDisplay" class="word-display">_ _ _ _</p>
-                    <p>Wrong guesses: <span id="wrongCount">0</span> / 6</p>
-                    <p>Used letters: <span id="usedLetters">None</span></p>
+
+                    <p>
+                        Wrong guesses:
+                        <span id="wrongCount">0</span> / 6
+                    </p>
+
+                    <p>
+                        Used letters:
+                        <span id="usedLetters">None</span>
+                    </p>
+
                     <p id="messageText" class="message"></p>
+
                     <section id="keyboard" class="keyboard">
                     </section>
+
                     <button type="button" id="playAgainButton">Play Again</button>
                 </section>
             </main>
+
             <footer>
                 <p>© Copyright 2026 - COMP2132</p>
             </footer>
+        </div>
+
+        <div id="resultPopup">
+            <div id="resultBox">
+                <h2 id="resultTitle">Game Over</h2>
+                <p id="resultMessage"></p>
+                <button type="button" id="popupPlayAgainButton">Play Again</button>
+            </div>
         </div>
     </body>
 </html>

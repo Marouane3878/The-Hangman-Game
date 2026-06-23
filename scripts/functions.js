@@ -46,12 +46,12 @@ function disableKeyboard() {
 }
 
 function updateHangmanImage(game, hangmanImage) {
-    hangmanImage.src = "./images/hangman-" + game.wrongGuesses + ".jpeg";
+    hangmanImage.src = "./images/hangman-" + game.wrongGuesses + ".png";
     hangmanImage.alt = "Hangman stage " + game.wrongGuesses;
 }
 
 function showHappyHangman(hangmanImage) {
-    hangmanImage.src = "./images/hangman-happy.jpeg";
+    hangmanImage.src = "./images/hangman-happy.png";
     hangmanImage.alt = "Happy saved hangman";
 }
 
@@ -67,4 +67,27 @@ function playSound(sound) {
     sound.play().catch(function() {
         console.log("Audio file could not play.");
     });
+}
+
+function showFeedback(gameCard, feedbackClass) {
+    gameCard.classList.remove("correct-flash");
+    gameCard.classList.remove("wrong-flash");
+
+    void gameCard.offsetWidth;
+
+    gameCard.classList.add(feedbackClass);
+
+    setTimeout(function() {
+        gameCard.classList.remove(feedbackClass);
+    }, 700);
+}
+
+function showResultPopup(resultPopup, resultTitle, resultMessage, title, message) {
+    resultTitle.textContent = title;
+    resultMessage.textContent = message;
+    resultPopup.style.display = "flex";
+}
+
+function hideResultPopup(resultPopup) {
+    resultPopup.style.display = "none";
 }

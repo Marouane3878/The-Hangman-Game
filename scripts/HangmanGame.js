@@ -16,7 +16,7 @@ class HangmanGame {
         this.words = words;
     }
 
-    startNewGame() {
+    startNewGame(resetWrongGuesses) {
         const randomNumber = Math.floor(Math.random() * this.words.length);
         const randomWord = this.words[randomNumber];
 
@@ -24,8 +24,11 @@ class HangmanGame {
         this.hint = randomWord.hint;
         this.correctLetters = [];
         this.guessedLetters = [];
-        this.wrongGuesses = 0;
         this.isOver = false;
+
+        if (resetWrongGuesses) {
+            this.wrongGuesses = 0;
+        }
     }
 
     guessLetter(letter) {
@@ -37,11 +40,6 @@ class HangmanGame {
 
         if (this.word.includes(letter)) {
             this.correctLetters.push(letter);
-
-            if (this.wrongGuesses > 0) {
-                this.wrongGuesses--;
-            }
-
             return "correct";
         } else {
             this.wrongGuesses++;
